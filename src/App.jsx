@@ -10,13 +10,6 @@
      class IssueTable extends React.Component{
          render() {
              return(
-                 <div>This is a placeholder for the issue list.</div>
-             );
-         }
-     }
-     class IssueTable extends React.Component{
-         render() {
-             return(
                  <div>This is a placeholder for the table of Issues.</div>
              );
          }
