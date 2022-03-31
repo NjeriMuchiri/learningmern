@@ -8,7 +8,7 @@
       },
       {
           id:2, status: 'Assigned', owner: 'Eddie',
-          created: new Date('2016=08-16'), effort:14, completionDate: new Date('2016-08-30'),
+          created: new Date('2016-08-16'), effort:14, completionDate: new Date('2016-08-30'),
           title: 'Missing bottom border on panel',
       },
   ];
