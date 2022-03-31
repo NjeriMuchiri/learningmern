@@ -16,7 +16,7 @@ var issues = [{
     title: 'Error in console when clicking Add'
 }, {
     id: 2, status: 'Assigned', owner: 'Eddie',
-    created: new Date('2016=08-16'), effort: 14, completionDate: new Date('2016-08-30'),
+    created: new Date('2016-08-16'), effort: 14, completionDate: new Date('2016-08-30'),
     title: 'Missing bottom border on panel'
 }];
 
@@ -203,10 +203,31 @@ var IssueList = function (_React$Component5) {
     function IssueList() {
         _classCallCheck(this, IssueList);
 
-        return _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).apply(this, arguments));
+        var _this5 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
+
+        _this5.state = { issues: issues };
+
+        setTimeout(_this5.createTestIssue.bind(_this5), 2000);
+        return _this5;
     }
 
     _createClass(IssueList, [{
+        key: 'createIssue',
+        value: function createIssue(newIssue) {
+            var newIssues = this.state.issues.slice();
+            newIssue.id = this.state.issues.length + 1;
+            newIssues.push(newIssue);
+            this.setState({ issues: newIssues });
+        }
+    }, {
+        key: 'createTestIssue',
+        value: function createTestIssue() {
+            this.createIssue({
+                status: 'New', owner: 'Pieta', created: new Date(),
+                title: 'Completion data should be optional'
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -219,7 +240,7 @@ var IssueList = function (_React$Component5) {
                 ),
                 React.createElement(IssueFilter, null),
                 React.createElement('hr', null),
-                React.createElement(IssueTable, { issues: issues }),
+                React.createElement(IssueTable, { issues: this.state.issues }),
                 React.createElement('hr', null),
                 React.createElement(IssueAdd, null)
             );
