@@ -249,9 +249,18 @@ var IssueList = function (_React$Component5) {
         value: function loadData() {
             var _this6 = this;
 
-            setTimeout(function () {
-                _this6.setState({ issues: issues });
-            }, 500);
+            fetch('/api/issues').then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                console.log("Total count o records:", data._metadata.total_count);
+                data.records.forEach(function (issue) {
+                    issue.created = new Date(issue.created);
+                    if (issue.completionDate) issue.completionDate = new Date(issue.completionDate);
+                });
+                _this6.setState({ issue: data.records });
+            }).catch(function (err) {
+                console.log(err);
+            });
         }
     }, {
         key: 'createIssue',
