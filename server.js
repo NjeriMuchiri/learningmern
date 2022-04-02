@@ -29,6 +29,6 @@ app.use(express.static('static'));
       res.json({_metadata: metadata, records:issues});
   });
 
-  app.listen(3000, function (){
+  app.listen(3000, () => {
     console.log('App started on port 3000');
 });
