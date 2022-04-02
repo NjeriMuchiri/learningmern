@@ -242,7 +242,7 @@ var IssueList = function (_React$Component5) {
             fetch('/api/issues').then(function (response) {
                 return response.json();
             }).then(function (data) {
-                console.log("Total count o records:", data._metadata.total_count);
+                console.log("Total count of records:", data._metadata.total_count);
                 data.records.forEach(function (issue) {
                     issue.created = new Date(issue.created);
                     if (issue.completionDate) issue.completionDate = new Date(issue.completionDate);
