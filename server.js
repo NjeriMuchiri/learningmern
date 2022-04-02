@@ -3,9 +3,6 @@ const express = require('express');
 const app = express();
 app.use(express.static('static'));
 
-app.listen(3000, function (){
-    console.log('App started on port 3000');
-});
  const issues = [
       {
           id:1, 
@@ -30,4 +27,8 @@ app.listen(3000, function (){
   app.get('/api/issues', (req, res) =>{
       const  metadata = {total_count: issues.length};
       res.json({_metadata: metadata, records:issues});
-  })
+  });
+
+  app.listen(3000, function (){
+    console.log('App started on port 3000');
+});
