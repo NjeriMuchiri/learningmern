@@ -247,7 +247,7 @@ var IssueList = function (_React$Component5) {
                     issue.created = new Date(issue.created);
                     if (issue.completionDate) issue.completionDate = new Date(issue.completionDate);
                 });
-                _this6.setState({ issue: data.records });
+                _this6.setState({ issues: data.records });
             }).catch(function (err) {
                 console.log(err);
             });

@@ -101,7 +101,7 @@
                     if (issue.completionDate)
                     issue.completionDate = new Date(issue.completionDate);
                 });
-                this.setState({issue:data.records});
+                this.setState({issues:data.records});
             }).catch(err => {
                 console.log(err);
             })

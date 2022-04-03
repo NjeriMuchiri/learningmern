@@ -46,6 +46,6 @@ app.use(bodyParser.json);
       res.json(newIssue);
   });
 
-  app.listen(3000, () => {
+  app.listen(3001, () => {
     console.log('App started on port 3000');
 });
