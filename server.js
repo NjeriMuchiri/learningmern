@@ -7,7 +7,13 @@ app.use(express.static('static'));
 app.use(bodyParser.json());
 
 
- const issues = [
+
+  app.get('/api/issues', (req, res) =>{
+      const  metadata = {total_count: issues.length};
+      res.json({_metadata: metadata, records:issues});
+  });
+
+  const issues = [
       {
           id:1, 
           status: 'Open', 
@@ -28,10 +34,38 @@ app.use(bodyParser.json());
       },
   ];
 
-  app.get('/api/issues', (req, res) =>{
-      const  metadata = {total_count: issues.length};
-      res.json({_metadata: metadata, records:issues});
-  });
+const validIssueStatus = {
+    New: true,
+    Open: true,
+    Assigned: true,
+    Fixed: true,
+    Verified: true,
+    Closed: true,
+};
+const issueFieldType = {
+    id: 'required',
+    status: 'required',
+    owner: 'required',
+    effort: 'optional',
+    created: 'required',
+    completionDate: 'optional',
+    title: 'required',
+};
+
+function validateIssue(issue) {
+    for (const field in issueFieldType){
+        const type = issueFieldType[field];
+        if(!type) {
+            delete issue[field];
+        } else if (type === 'required' && !issue[field]){
+            return `${field} is required`;
+        }
+    }
+    if(!validIssueStatus[issue.status])
+    return `${issue.status} is not a valid status`;
+    return null;
+}
+ 
 
   app.post('/api/issues', (req,res) => {
       const newIssue = req.body;
@@ -40,6 +74,12 @@ app.use(bodyParser.json());
 
       if (!newIssue.status)
       newIssue.status = 'New';
+
+      const err = validateIssue(newIssue)
+      if (err) {
+          res.status(422).json({message: `Invalid request: ${err}`});
+          return;
+      }
 
       issues.push(newIssue);
 
