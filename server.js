@@ -10,8 +10,13 @@ app.use(bodyParser.json());
 
 
   app.get('/api/issues', (req, res) =>{
-      const  metadata = {total_count: issues.length};
+      db.collection('issues').find().toArray().then(issues => {
+     const  metadata = {total_count: issues.length};
       res.json({_metadata: metadata, records:issues});
+      }).catch(error => {
+          console.log(error);
+          res.status(500).json({message: `Internal Server Error: ${error}`})
+      });
   });
 
   const issues = [
