@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const MongoClient = require('mongodb').MongoClient;
 
 
 app.use(express.static('static'));
@@ -86,6 +87,14 @@ function validateIssue(issue) {
       res.json(newIssue);
   });
 
-  app.listen(3001, () => {
+let db;
+MongoClient.connect('mongodb://localhost/issuetracker').then(connection => {
+    db = connection;
+
+     app.listen(3001, () => {
     console.log('App started on port 3001');
 });
+}).catch(error => {
+    console.log('ERROR:',error);
+});
+ 
