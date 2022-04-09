@@ -19,7 +19,7 @@ app.use(bodyParser.json());
       });
   });
 
-  const issues = [
+    const issues = [
       {
           id:1, 
           status: 'Open', 
@@ -38,8 +38,8 @@ app.use(bodyParser.json());
           completionDate: new Date('2016-08-30'),
           title: 'Missing bottom border on panel',
       },
-  ];
-
+  ];  
+ 
 const validIssueStatus = {
     New: true,
     Open: true,
@@ -93,7 +93,7 @@ function validateIssue(issue) {
   });
 
 let db;
-MongoClient.connect('mongodb://localhost:3001/issuetracker').then(connection => {
+MongoClient.connect('mongodb://localhost/issuetracker').then(connection => {
     db = connection;
 
      app.listen(3001, () => {

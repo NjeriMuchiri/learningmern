@@ -103,7 +103,7 @@ var IssueRow = function (_React$Component3) {
                 React.createElement(
                     'td',
                     null,
-                    issue._id
+                    Bissue._id
                 ),
                 React.createElement(
                     'td',
