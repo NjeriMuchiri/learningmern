@@ -93,7 +93,7 @@ function validateIssue(issue) {
   });
 
 let db;
-MongoClient.connect('mongodb://localhost/issuetracker').then(connection => {
+MongoClient.connect('mongodb://localhost:3001/issuetracker').then(connection => {
     db = connection;
 
      app.listen(3001, () => {

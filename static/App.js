@@ -103,7 +103,7 @@ var IssueRow = function (_React$Component3) {
                 React.createElement(
                     'td',
                     null,
-                    issue.id
+                    issue._id
                 ),
                 React.createElement(
                     'td',
@@ -155,7 +155,7 @@ var IssueTable = function (_React$Component4) {
         key: 'render',
         value: function render() {
             var issueRows = this.props.issues.map(function (issue) {
-                return React.createElement(IssueRow, { key: issue.id, issue: issue });
+                return React.createElement(IssueRow, { key: issue._id, issue: issue });
             });
             return React.createElement(
                 'table',
@@ -271,11 +271,11 @@ var IssueList = function (_React$Component5) {
                     });
                 } else {
                     response.json().then(function (error) {
-                        alert("Failed to add issue: " + error.message);
+                        alert("Failed to fetch issues: " + error.message);
                     });
                 }
             }).catch(function (err) {
-                alert("Error in sending data to server:" + err.message);
+                alert("Error in fetching data from the server:", err);
             });
         }
     }, {
