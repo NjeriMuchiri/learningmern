@@ -75,7 +75,6 @@ function validateIssue(issue) {
 
   app.post('/api/issues', (req,res) => {
       const newIssue = req.body;
-      newIssue.id = issues.length + 1;
       newIssue.created = new Date();
 
       if (!newIssue.status)
@@ -86,10 +85,14 @@ function validateIssue(issue) {
           res.status(422).json({message: `Invalid request: ${err}`});
           return;
       }
-
-      issues.push(newIssue);
-
-      res.json(newIssue);
+      db.collection('issues').insertOne(newIssue).then(result =>
+          db.collection('issues').find({ _id: result.insertedId}).limit(1).next()
+      ).then(newIssue => {
+          res.json(newIssue);
+      }).catch(error => {
+          console.log(error);
+          res.status(500).json({message: `Internal Server Error: ${error}`});
+      });
   });
 
 let db;

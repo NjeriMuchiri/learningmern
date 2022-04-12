@@ -3,7 +3,6 @@ db = new Mongo().getDB('issuetracker');
 db.issues.remove({});
 
 db.issues.insert([
-
    {
           status: 'Open', 
           owner: 'Ravan',
